@@ -1,0 +1,28 @@
+#!/bin/bash
+
+img_name="image_name.sif"
+
+echo """ ____ ____  _   _ _____ ____    _   _ _____ _     ____   
+/ ___/ ___|| | | |  ___/ ___|  | | | | ____| |   |  _ \  
+\___ \___ \| |_| | |_  \___ \  | |_| |  _| | |   | |_) | 
+ ___) |__) |  _  |  _|  ___) | |  _  | |___| |___|  __/  
+|____/____/|_| |_|_|   |____/  |_| |_|_____|_____|_|     
+
+To use this container you have to have a computer that can use sshfs (https://github.com/libfuse/sshfs) to mount folder over ssh. If you are running Linux it might be possible to install from your ordinary software repositories, otherwise you can search for instructions on how to install it on your operating system and usually find a good guide. 
+
+If you are having problems installing sshfs, you could try to use the sshfs binary included in the container. Who knows, maybe it works on your computer. If you run
+
+singularity exec $img_name sshfs_extract
+
+and you will have a copy of the sshfs binary in the folder you are standing. You can try running it just to see if it runs
+
+./sshfs
+
+which should give you a message about 'missing host' if it starts. Place this somewhere that is in your PATH and see if it works.
+
+You will have to enable allow_other in your fuse.conf for the mounting to work. Usually it is located in /etc/fuse.conf, edit this file and make sure the line
+
+user_allow_other
+
+is uncommented.
+"""

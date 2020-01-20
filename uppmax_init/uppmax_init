@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+
+img_name="image_name.sif"
+
+# copy the mounting files to where the user is
+cp /uppmax_init/*mount* .
+
+# init directory structure
+mkdir -p mnt/home/$a
+mkdir -p mnt/proj
+mkdir -p mnt/sw
+mkdir -p mnt/crex
+mkdir -p mnt/usr/local/Modules
+
+# print success message
+echo """ _____________________________________
+/ Alrighty, mounting files copied and \ 
+\ directories created                 / 
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\ 
+                ||----w |
+                ||     ||
+
+To start, run ./mount_sshfs.sh which will mount the directories needed, then start the container.
+
+To start the container manually you can also run
+
+singularity shell --no-home --bind mnt/sw:/sw,mnt/proj:/proj,mnt/usr/local/Modules:/usr/local/Modules,mnt/home/YOUR_UPPMAX_USERNAME:/home/YOUR_UPPMAX_USERNAME $img_name
+
+(remember to replace YOUR_UPPMAX_USERNAME with your uppmax username)
+"""
