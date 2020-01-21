@@ -22,9 +22,9 @@ For installation instructions for these, see respective projects homepage.
 # Installation
 Clone the github repo and build the image:
 
-`git clone https://github.com/UPPMAX/uppmax_in_a_can.git
-cd uppmax_in_a_can
-singularity build uppmax_in_a_can.sif uppmax_in_a_can.def`
+`git clone https://github.com/UPPMAX/uppmax_in_a_can.git  
+cd uppmax_in_a_can  
+singularity build uppmax_in_a_can.sif uppmax_in_a_can.def`  
 
 The build takes 10-20 minutes on a modern laptop with gigabit ethernet. Once the build is done, run the initialization script in the container to setup the folder structure needed to create sshfs mount points:
 
