@@ -1,6 +1,6 @@
 #!/bin/bash
 
-img_name="image_name.sif"
+img_name="uppmax_in_a_can.sif"
 
 echo """-----------------------------------------
 For the impatient:
@@ -41,9 +41,9 @@ source mount_sshfs.sh
 
 and it will use sshfs (must be in your PATH) to mount the sw, proj and home folder on UPPMAX, to the folders inside mnt/. It will then start the container automatically. If you have already mounted the folder, you can either run source mount_sshfs.sh again, or run the container manually 
 
-singularity shell --no-home --bind mnt/sw:/sw,mnt/proj:/proj,mnt/usr/local/Modules:/usr/local/Modules,mnt/home/YOUR_UPPMAX_USERNAME:/home/YOUR_UPPMAX_USERNAME $img_name
+singularity shell --no-home --bind mnt/sw:/sw,mnt/proj:/proj,mnt/usr/local/Modules:/usr/local/Modules,mnt/home/UPPMAX_USERNAME:/home/UPPMAX_USERNAME $img_name
 
-(remember to replace YOUR_UPPMAX_USERNAME with your uppmax username)
+(remember to replace UPPMAX_USERNAME with your uppmax username)
 
 If you want to unmount the sshfs mounts, just run unmount_sshfs.sh
 """

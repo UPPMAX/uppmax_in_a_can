@@ -1,6 +1,6 @@
 #!/bin/bash
 
-img_name="image_name.sif"
+img_name="uppmax_in_a_can.sif"
 
 echo """ ____ ____  _   _ _____ ____    _   _ _____ _     ____   
 / ___/ ___|| | | |  ___/ ___|  | | | | ____| |   |  _ \  

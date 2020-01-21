@@ -1,14 +1,12 @@
 #!/bin/bash
 
-#set -e
+set -e
 #set -x
 
-img_name="image_name.sif"
-
-# get the uppax username
+# get the uppmax username
 echo "UPPMAX username:"
 read a
-
+    
 # check if anything needs unmounting
 read -r mount_sw mount_proj mount_crex mount_home mount_module <<< $(echo 0 0 0 0 0)
 [[ -d mnt/sw/mf ]] || mount_sw=1
@@ -20,6 +18,8 @@ read -r mount_sw mount_proj mount_crex mount_home mount_module <<< $(echo 0 0 0 
 # get the uppmax password
 if [[ $((mount_sw+mount_proj+mount_crex+mount_home+mount_module)) > 0 ]] ;
 then
+    
+    # get the uppmax password
     echo "UPPMAX password:"
     read -s l
 fi
@@ -51,16 +51,18 @@ read -r mount_sw mount_proj mount_crex mount_home mount_module <<< $(echo 0 0 0 
 
 if [[ $((mount_sw+mount_proj+mount_crex+mount_home+mount_module)) == 0 ]] ;
 then
-    echo """ ________________________________________
-/ All good, partner. Let's get this show \ 
-\ on the road.                           / 
- ----------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\ 
+    printf """ ____________________________________________
+/                                            \ 
+| Alrigt, sshfs mount points are up!         |
+| To start the virtual UPPMAX node           |
+|                                            |
+| $ ./start_node.sh uppmax_in_a_can.sif      |
+\____________________________________________/ 
+        \  ^___^
+         \ (ooo)\_______
+           (___)\       )\/\ 
                 ||----w |
                 ||     ||
+                
 """
 fi
-
-singularity shell --no-home --bind mnt/sw:/sw,mnt/proj:/proj,mnt/usr/local/Modules:/usr/local/Modules,mnt/home/$a:/home/$a,mnt/crex:/crex $img_name
