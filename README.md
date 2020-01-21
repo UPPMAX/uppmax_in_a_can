@@ -41,7 +41,7 @@ Before starting the container you have to run the mount script to set up the ssh
 Then you can start the virtual node:
 `./start_node.sh uppmax_in_a_can.sif`
 
-You will now be on the command-line inside the container and you can run commands as if you were logged in on uppmax. You will see all project folders in /proj, all software in /sw, your uppmax home folder in /home/$USER
+You will now be on the command-line inside the container and you can run commands as if you were logged in on uppmax. You will see all project folders in `/proj`, all software in `/sw`, your uppmax home folder in `/home/$USER`
 
 ```bash
 # ex
@@ -53,7 +53,7 @@ To close down and return to your own computers command-line, just type `exit`.
 
 # Advanced usage
 
-If you want to run specific commands rather than be dropped on an interactive command-line, you can use the exec argument to singularity.
+If you want to run specific commands rather than be dropped on an interactive command-line, you can use the `exec` argument to singularity.
 
 
 ```bash
