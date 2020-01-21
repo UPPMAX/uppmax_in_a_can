@@ -22,10 +22,12 @@ For installation instructions for these, see respective projects homepage.
 # Installation
 Clone the github repo and build the image:
 
-bash
-```git clone https://github.com/UPPMAX/uppmax_in_a_can.git
+
+```bash
+git clone https://github.com/UPPMAX/uppmax_in_a_can.git
 cd uppmax_in_a_can
-singularity build uppmax_in_a_can.sif uppmax_in_a_can.def```
+singularity build uppmax_in_a_can.sif uppmax_in_a_can.def
+```
 
 The build takes 10-20 minutes on a modern laptop with gigabit ethernet. Once the build is done, run the initialization script in the container to setup the folder structure needed to create sshfs mount points:
 
@@ -41,10 +43,11 @@ Then you can start the virtual node:
 
 You will now be on the command-line inside the container and you can run commands as if you were logged in on uppmax. You will see all project folders in /proj, all software in /sw, your uppmax home folder in /home/$USER
 
-bash
-```# ex
+```bash
+# ex
 module load bioinf-tools ; module load samtools
-samtools view file.bam```
+samtools view file.bam
+```
 
 To close down and return to your own computers command-line, just type `exit`.
 
@@ -52,8 +55,10 @@ To close down and return to your own computers command-line, just type `exit`.
 
 If you want to run specific commands rather than be dropped on an interactive command-line, you can use the exec argument to singularity.
 
-bash
-```singularity exec --no-home --bind mnt/sw:/sw,mnt/proj:/proj,mnt/usr/local/Modules:/usr/local/Modules,mnt/home/UPPMAX_USERNAME:/home/UPPMAX_USERNAME uppmax_in_a_can.sif <custom commands here>```
+
+```bash
+singularity exec --no-home --bind mnt/sw:/sw,mnt/proj:/proj,mnt/usr/local/Modules:/usr/local/Modules,mnt/home/UPPMAX_USERNAME:/home/UPPMAX_USERNAME uppmax_in_a_can.sif <custom commands here>
+```
 
 
 # Background info
