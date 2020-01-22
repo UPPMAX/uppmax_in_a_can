@@ -1,15 +1,18 @@
 # UPPMAX in a can
-Using Singularity to create a near-identical UPPMAX environment for development. It runs on your own computer but gives you access to the files at UPPMAX.
+This Singularity container will let you run a near-identical UPPMAX environment on your own computer. You will have access to all of the installed software at UPPMAX, all your files and reference data on UPPMAX, but it will be your own computer that does the calculations. You can even use it to analyse data that you only have on your own computer, but using the software and reference data on UPPMAX.
 
 # What you get
-* Same OS and almost all packages installed at UPPMAX.
-* Access to the whole module system.
 * Access to your home folder and all project folders.
-* Access to all reference data.
+* Access to all the installed programs at UPPMAX.
+* Access to all reference data at UPPMAX.
 
 # What you don't get
+* UPPMAX high-performace computers. You will be limited by the computer you are running the container on.
 * No slurm access. Everything runs on your computer.
 
+# Important notes
+* The first time you run `module` it will have to go through all the module files at UPPMAX, which takes quite a bit longer when you do it over a sshfs connection. It could take a minute or two. After that initial command, the module list will be cached and subsequent request should be much faster.
+* Since all data you read/write to the UPPMAX file system will have to travel over the internet, disk intensive programs will be much slower, and transfer rate is limited to your internet connection.
 
 # Prerequisites
 You should only need 2 things for this to work,
@@ -26,7 +29,7 @@ Clone the github repo and build the image:
 ```bash
 git clone https://github.com/UPPMAX/uppmax_in_a_can.git
 cd uppmax_in_a_can
-singularity build uppmax_in_a_can.sif uppmax_in_a_can.def
+singularity build uppmax_in_a_can.sif Singularity
 ```
 
 The build takes 10-20 minutes on a modern laptop with gigabit ethernet. Once the build is done, run the initialization script in the container to setup the folder structure needed to create sshfs mount points:
@@ -52,6 +55,14 @@ samtools view file.bam
 To close down and return to your own computers command-line, just type `exit`.
 
 # Advanced usage
+
+You can also specify any additional singularity options to the `start_node.sh` script. If you want to make your computers file system visible inside the container so that you can analyse files residing on your computer, just add a bind argument:
+
+```bash
+./start_node.sh --bind /:/hostfs uppmax_in_a_can.sif
+```
+
+This command will make your computers file system available under `/hostfs`.
 
 If you want to run specific commands rather than be dropped on an interactive command-line, you can use the `exec` argument to singularity.
 

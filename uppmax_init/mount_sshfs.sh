@@ -3,6 +3,13 @@
 set -e
 #set -x
 
+# check if sshfs in is the path
+[[ $(command -v sshfs) ]] || printf 'There is no sshfs in your PATH. Please run 
+
+singularity exec uppmax_in_a_can.sif sshfs_extract ; PATH=$PATH:$(pwd) ; ./mount_sshfs.sh
+
+to get a precompiled sshfs executable that could work on your system. If it does not, please install sshfs on your own (https://github.com/libfuse/sshfs).'
+
 # get the uppmax username
 echo "UPPMAX username:"
 read a
