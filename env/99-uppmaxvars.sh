@@ -20,17 +20,14 @@ export __LMOD_REF_COUNT_MODULEPATH=/sw/mf/rackham/applications:/sw/mf/rackham/bu
 export __LMOD_REF_COUNT_PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sw/uppmax/bin:2
 export __LMOD_REF_COUNT__LMFILES_=/sw/mf/rackham/environment/uppmax:1
 export modules_shell=bash
-
-# QoL
-alias l='ls -l --color=auto --group-directories-first'
-alias ll='ls -la --color=auto --group-directories-first'
+export TERM=xterm
 
 # module function
 module() { eval `/usr/local/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
 export -f module
 
 # custom PS1
-export PS1="\[$(tput bold)\][\t] \u@canned-uppmax \w \\$ \[$(tput sgr0)\]"
+export PS1='\[$(tput bold)\][\t] \u@canned-uppmax \w \\$ \[$(tput sgr0)\]'
 
 # add the scripts to the path
 export PATH=$PATH:/uppmax_init/
