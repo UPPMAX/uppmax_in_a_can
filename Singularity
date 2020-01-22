@@ -1,4 +1,4 @@
-Bootstrap: library
+Bootstrap: docker
 From: centos:7
 
 
