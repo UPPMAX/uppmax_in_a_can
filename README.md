@@ -24,13 +24,13 @@ For installation instructions for these, see respective projects homepage.
 
 # Installation
 
-## Using a pre-built image
+#### Using a pre-built image
 
 ```bash
 singularity pull shub://UPPMAX/uppmax_in_a_can
 ```
 
-## Building your own image from github. 
+#### Building your own image from github. 
 Clone the github repo and build the image:
 
 ```bash
