@@ -1,14 +1,14 @@
 #!/bin/bash
 
-img_name="uppmax_in_a_can.sif"
+echo """See GitHub page for documentation: https://github.com/UPPMAX/uppmax_in_a_can
 
-echo """-----------------------------------------
+-----------------------------------------
 For the impatient:
 # run this first time using it
-$ singularity exec $img_name uppmax_init
+$ singularity exec $SINGULARITY_NAME uppmax_init
 
 # start the container
-$ source mount_sshfs.sh
+$ ./start_node.sh $SINGULARITY_NAME
 -----------------------------------------
      _   _ ____  ____  __  __    _    __  __ 
     | | | |  _ \|  _ \|  \/  |  / \   \ \/ / 
@@ -27,23 +27,25 @@ Hello, and welcome to UPPMAX-in-a-can
 
 In short, you have to have have sshfs working with the option user_allow_other enabled in your fuse.conf. To see more info about this, run
 
-singularity exec $img_name sshfs_help
+singularity exec $SINGULARITY_NAME sshfs_help
+
 
 If you have just downloaded the container file you will have to run a initialization command and the container will create a couple of files for you, in the directory you are standing when executing the command:
 
-singularity exec $img_name uppmax_init
+singularity exec $SINGULARITY_NAME uppmax_init
 
-This command should have created a folder called mnt/ and two files; mount_sshfs.sh and unmount_sshfs.sh
+
+This command should have created a folder called mnt/ and a file named unmount_sshfs.sh
 
 To start using the container just run the following command:
 
-source mount_sshfs.sh
+./start_node.sh $SINGULARITY_NAME
 
-and it will use sshfs (must be in your PATH) to mount the sw, proj and home folder on UPPMAX, to the folders inside mnt/. It will then start the container automatically. If you have already mounted the folder, you can either run source mount_sshfs.sh again, or run the container manually 
 
-singularity shell --no-home --bind mnt/sw:/sw,mnt/proj:/proj,mnt/usr/local/Modules:/usr/local/Modules,mnt/home/UPPMAX_USERNAME:/home/UPPMAX_USERNAME $img_name
+and it will use sshfs (must be in your PATH) to mount the sw, proj, crex and home folder on UPPMAX, to the folders inside mnt/. It will then start the container automatically. If you have already mounted the folders in a previous run of the command it will skip re-mounting them and just start the container.
 
-(remember to replace UPPMAX_USERNAME with your uppmax username)
+If you want to unmount the sshfs mounts, just run 
 
-If you want to unmount the sshfs mounts, just run unmount_sshfs.sh
+./unmount_sshfs.sh
+
 """

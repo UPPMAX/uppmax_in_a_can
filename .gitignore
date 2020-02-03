@@ -3,3 +3,4 @@
 ./mount_sshfs.sh
 ./unmount_sshfs.sh
 */mnt/*
+test/

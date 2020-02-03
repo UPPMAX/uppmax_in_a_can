@@ -2,6 +2,6 @@
 
 #set -e
 
-cp /uppmax_init/sshfs .
+cp -v /uppmax_init/sshfs .
 
 echo "sshfs binary copied."
