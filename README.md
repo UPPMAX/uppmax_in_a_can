@@ -24,7 +24,7 @@ For installation instructions for these, see respective projects homepage.
 
 # Installation
 
-#### Using a pre-built image
+### Using a pre-built image
 
 ```bash
 singularity pull shub://UPPMAX/uppmax_in_a_can
