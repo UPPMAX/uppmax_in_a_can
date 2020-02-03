@@ -14,7 +14,7 @@ img_name=${1:?
     
 ERROR: Image name not specified
 Usage:
-    ./start_node.sh [singularity options] <name of singularity image file>
+    ./start_node.sh [-m] [singularity options] <name of singularity image file>
     
 Example:
     ./start_node.sh uppmax_in_a_can_latest.sif
@@ -22,7 +22,13 @@ Example:
     # or any additional valid singularity arguments.
     # the example below will mount your computers file system
     # inside the container under /hostfs
-    ./start_node.sh --bind /:/hostfs uppmax_in_a_can_latest.sif}
+    ./start_node.sh --bind /:/hostfs uppmax_in_a_can_latest.sif
+
+    # if only -m is given as argument, the script will only
+    # mount the sshfs shares and then exit without starting
+    # the container.
+
+}
 
 #  __  __                   _   
 # |  \/  | ___  _   _ _ __ | |_ 
@@ -96,6 +102,21 @@ for mount in ${mounts[@]}
 do 
     sshfs_mount $mount
 done
+
+#  ____  _    _             _             _
+# / ___|| | _(_)_ __    ___| |_ __ _ _ __| |_
+# \___ \| |/ / | '_ \  / __| __/ _` | '__| __|
+#  ___) |   <| | |_) | \__ \ || (_| | |  | |_
+# |____/|_|\_\_| .__/  |___/\__\__,_|_|   \__|
+#              |_|
+# Skip start
+
+# check if the user only wants to mount the sshfs shares
+if [[ "$1" == "-m" ]]
+then
+    printf "All mounts are up, exiting.\n"
+    exit
+fi
 
 #  ____  _             _                     _      
 # / ___|| |_ __ _ _ __| |_   _ __   ___   __| | ___ 
