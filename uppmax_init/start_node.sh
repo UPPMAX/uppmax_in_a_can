@@ -82,39 +82,8 @@ function sshfs_mount () {
     fi
 }
 
-
-# Create a sshfs mount function
-#function sshfs_mount () {
-#    share_name=${1:? share_name/ missing}
-#    # Check if sub directory is not mounted
-#    if [[ ! -d $share_name/${sub_mount[$share_name]} ]]
-#    then
-#
-#        # Get password unless we already have it.
-#        if [[ -z "$l" ]]
-#        then
-#            echo "UPPMAX password:"
-#            read -s l
-#        fi
-#
-#        # Mount the directory
-#        echo -ne "Mounting /$share_name/ \t \r"
-#        sshfs -o allow_other,password_stdin $a@rackham.uppmax.uu.se:/"$share_name/" mnt/"$share_name/" <<< $l
-#        if [[ $? != 0 ]]
-#        then
-#            echo -ne "Mounting /$share_name/ \t FAILED!\n"
-#            exit 1
-#        fi
-#       echo -ne "Mounting /$share_name/ \t DONE\n"
-#    else
-#       echo -ne "Mounting /$share_name/ \t DONE\n"
-#    fi
-#}
-
-
 # Mount necessary directories
 mounts=(crex etc home proj sw usr/local/Modules)
-#mounts=(sw home etc usr/local/Modules)
 declare -A sub_mount=( \
     ["crex"]="proj" \
     ["etc"]="yum" \
