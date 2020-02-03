@@ -41,7 +41,7 @@ Example:
 # check if sshfs in is the path
 [[ $(command -v sshfs) ]] || { printf 'There is no sshfs in your PATH. Please run 
 
-singularity exec uppmax_in_a_can.sif sshfs_extract ; PATH=$PATH:$(pwd) ; ./mount_sshfs.sh
+singularity exec uppmax_in_a_can_latest.sif sshfs_extract ; PATH=$PATH:$(pwd) ; ./start_node.sh uppmax_in_a_can_latest.sif
 
 to get a precompiled sshfs executable that could work on your system. If it does not, please install sshfs on your own (https://github.com/libfuse/sshfs).
 ' ; exit 1; }
@@ -51,11 +51,11 @@ printf "UPPMAX username: "
 read a
 
 # init structure
+mkdir -p mnt/crex
+mkdir -p mnt/etc
 mkdir -p mnt/home/
 mkdir -p mnt/proj
 mkdir -p mnt/sw
-mkdir -p mnt/crex
-mkdir -p mnt/etc
 mkdir -p mnt/usr/local/Modules
 
 # Create a sshfs mount function
@@ -125,7 +125,6 @@ fi
 # |____/ \__\__,_|_|   \__| |_| |_|\___/ \__,_|\___|
 #                                                   
 # Start node
-export PWD=/
 
-singularity shell --containall --bind mnt/sw:/sw,mnt/proj:/proj,mnt/usr/local/Modules:/usr/local/Modules,mnt/home/:/home/,mnt/crex:/crex,mnt/etc:/etc $@
+singularity shell --contain --home /home/$USER:/hosthome --bind mnt/sw:/sw,mnt/proj:/proj,mnt/usr/local/Modules:/usr/local/Modules,mnt/home/:/home/,mnt/crex:/crex,mnt/etc:/etc $@
 

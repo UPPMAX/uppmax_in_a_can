@@ -4,3 +4,4 @@
 ./unmount_sshfs.sh
 */mnt/*
 test/
+*/*.swp

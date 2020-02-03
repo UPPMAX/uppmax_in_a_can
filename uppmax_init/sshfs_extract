@@ -2,6 +2,7 @@
 
 #set -e
 
+printf "Copying files\n"
 cp -v /uppmax_init/sshfs .
 
-echo "sshfs binary copied."
+printf "\nsshfs binary copied.\n"
