@@ -30,7 +30,7 @@ For installation instructions for these, see respective projects homepage.
 singularity pull shub://UPPMAX/uppmax_in_a_can
 ```
 
-#### Building your own image from github. 
+### Building your own image from github. 
 Clone the github repo and build the image:
 
 ```bash
