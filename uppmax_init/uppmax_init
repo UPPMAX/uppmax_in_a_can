@@ -2,37 +2,17 @@
 
 set -e
 
-img_name="uppmax_in_a_can.sif"
-
 # copy the mounting files to where the user is
-cp /uppmax_init/*.sh .
-
-# init directory structure
-mkdir -p mnt/home/$a
-mkdir -p mnt/proj
-mkdir -p mnt/sw
-mkdir -p mnt/crex
-mkdir -p mnt/usr/local/Modules
+cp -v /uppmax_init/*.sh .
 
 # print success message
-echo """ _____________________________________
-/ Alrighty, mounting files copied and \ 
-\ directories created                 / 
- -------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\ 
-                ||----w |
-                ||     ||
+echo """ 
+To start, run:
 
-To start, run ./mount_sshfs.sh which will mount the directories needed, then run
-
-./mount_sshfs.sh $img_name
-./start_node.sh $img_name
+./start_node.sh $SINGULARITY_NAME
 
 To start the container manually you can also run
 
-singularity shell --no-home --bind mnt/sw:/sw,mnt/proj:/proj,mnt/usr/local/Modules:/usr/local/Modules,mnt/home/UPPMAX_USERNAME:/home/UPPMAX_USERNAME $img_name
+singularity shell --containall --bind mnt/crex:/crex,mnt/etc:/etc,mnt/home/:/home/,mnt/proj:/proj,mnt/sw:/sw,mnt/usr/local/Modules:/usr/local/Modules $SINGULARITY_NAME
 
-(remember to replace UPPMAX_USERNAME with your uppmax username)
 """
