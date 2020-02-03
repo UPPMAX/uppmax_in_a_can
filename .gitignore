@@ -2,4 +2,4 @@
 *.simg
 ./mount_sshfs.sh
 ./unmount_sshfs.sh
-mnt/*
+*/mnt/*
