@@ -1,4 +1,4 @@
-# UPPMAX in a can
+# UPPMAX in a can 
 This Singularity container will let you run a near-identical UPPMAX environment on your own computer. You will have access to all of the installed software at UPPMAX, all your files and reference data on UPPMAX, but it will be your own computer that does the calculations. You can even use it to analyse data that you only have on your own computer, but using the software and reference data on UPPMAX.
 
 # What you get
