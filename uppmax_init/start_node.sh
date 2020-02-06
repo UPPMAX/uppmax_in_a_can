@@ -30,6 +30,44 @@ Example:
 
 }
 
+
+
+
+
+print_usage() {
+  usage="""
+  $(basename $0)
+  -------------------------------------
+  A wraper to start the UPPMAX container.
+
+  Usage:
+  bash $(basename $0) -i <input dir> -o <output dir> [-b <barcode override> -c <channel names override> -q -j <imgs per job> -s <subset to this number of imgsets>]
+
+  Options:
+  -i    Input directory containing images (will get all images recursivly).
+  -e	Extra Singularity options to be passed, e.g. additional --bind
+  -m	Mount the sshfs shares only, don't start the container. 
+  -s	Start the container only, don't mount the sshfs shars. 
+
+"""
+  printf "$usage"
+
+}
+
+
+# check arguments
+while getopts 'i:ems:' flag; do
+  case "${flag}" in
+    i) image="${OPTARG}" ;;
+    e) extra_options="${OPTARG}" ;;
+    m) mount_only=1 ;;
+    s) start_only=1 ;;
+    *) print_usage
+       exit 1 ;;
+  esac
+done
+
+
 #  __  __                   _   
 # |  \/  | ___  _   _ _ __ | |_ 
 # | |\/| |/ _ \| | | | '_ \| __|
