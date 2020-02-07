@@ -3,6 +3,7 @@
 set -e
 
 # copy the mounting files to where the user is
+printf "Copying files\n"
 cp -v /uppmax_init/*.sh .
 
 # print success message

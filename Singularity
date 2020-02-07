@@ -22,6 +22,9 @@ From: centos:7
     # save build time
     SINGULARITY_BUILD_DATE=`date`
     echo "export SINGULARITY_BUILD_DATE=\"${SINGULARITY_BUILD_DATE}\"" >> $SINGULARITY_ENVIRONMENT
+
+    # create mount point folders
+    mkdir -p /mnt/crex /mnt/etc /mnt/home/ /mnt/proj /mnt/sw /mnt/usr/local/Modules
     
     
 
