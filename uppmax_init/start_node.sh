@@ -9,31 +9,6 @@ set -e
 #                      |___/                                  
 # Image check
 
-# check that at least one argument is given to the script
-img_name=${1:?
-    
-ERROR: Image name not specified
-Usage:
-    ./start_node.sh [-m] [singularity options] <name of singularity image file>
-    
-Example:
-    ./start_node.sh uppmax_in_a_can_latest.sif
-    
-    # or any additional valid singularity arguments.
-    # the example below will mount your computers file system
-    # inside the container under /hostfs
-    ./start_node.sh --bind /:/hostfs uppmax_in_a_can_latest.sif
-
-    # if only -m is given as argument, the script will only
-    # mount the sshfs shares and then exit without starting
-    # the container.
-
-}
-
-
-
-
-
 print_usage() {
   usage="""
   $(basename $0)
@@ -41,13 +16,14 @@ print_usage() {
   A wraper to start the UPPMAX container.
 
   Usage:
-  bash $(basename $0) -i <input dir> -o <output dir> [-b <barcode override> -c <channel names override> -q -j <imgs per job> -s <subset to this number of imgsets>]
+  bash $(basename $0) -i <input dir> [-mne "<extra options>"]
 
   Options:
-  -i    Input directory containing images (will get all images recursivly).
+  -i    Input directory constituting the Singularity image
   -e	Extra Singularity options to be passed, e.g. additional --bind
   -m	Mount the sshfs shares only, don't start the container. 
   -s	Start the container only, don't mount the sshfs shars. 
+  -u	Unmount sshfs shares only, don't start the container.
 
 """
   printf "$usage"
@@ -56,16 +32,24 @@ print_usage() {
 
 
 # check arguments
-while getopts 'i:ems:' flag; do
+while getopts 'iemsu:' flag; do
   case "${flag}" in
     i) image="${OPTARG}" ;;
     e) extra_options="${OPTARG}" ;;
     m) mount_only=1 ;;
     s) start_only=1 ;;
+    u) unmount_only=1 ;;
     *) print_usage
        exit 1 ;;
   esac
 done
+
+# Sanity check
+if [[ $mount_only+$start_only+$unmount_only > 1]]
+then
+    printf "-m, -n and -s are mutually exclusive, only specify one of them.\n"
+    exit 1
+fi	
 
 
 #  __  __                   _   
