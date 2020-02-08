@@ -1,5 +1,8 @@
 #!/bin/bash
+
 #set -e
+#set -x
+#trap read debug
 
 #  ___                                   _               _    
 # |_ _|_ __ ___   __ _  __ _  ___    ___| |__   ___  ___| | __
@@ -51,7 +54,7 @@ then
     printf "-m, -s and -u are mutually exclusive, only specify one of them.\n"
     exit 1
 fi
-printf "IMG: $image.\n"
+
 # make sure image is specified
 if [[ -z "$image" ]]
 then
@@ -70,6 +73,14 @@ fi
 # |_|  |_|\___/ \__,_|_| |_|\__|
 #                               
 # Mount
+
+# not needed if unmounting only
+if [[ $unmount_only != 1 ]]
+then
+    # get the uppmax username
+    printf "UPPMAX username: "
+    read a
+fi
 
 # Define mounts
 mounts=(crex etc home proj sw usr/local/Modules)
@@ -92,10 +103,6 @@ then
 
     to get a precompiled sshfs executable that could work on your system. If it does not, please install sshfs on your own (https://github.com/libfuse/sshfs).
     ' ; exit 1; }
-
-    # get the uppmax username
-    printf "UPPMAX username: "
-    read a
 
     # Create a sshfs mount function
     function sshfs_mount () {
@@ -189,6 +196,9 @@ fi
 # |____/ \__\__,_|_|   \__| |_| |_|\___/ \__,_|\___|
 #                                                   
 # Start node
+
+# update the uppmax username in the image directory
+printf "$a" > $image/uppmax_init/username.txt
 
 singularity shell --no-home --contain --bind $image/mnt/sw:/sw,$image/mnt/proj:/proj,$image/mnt/usr/local/Modules:/usr/local/Modules,$image/mnt/home/:/home/,$image/mnt/crex:/crex $extra_options $image
 
