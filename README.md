@@ -47,11 +47,11 @@ The build takes 10-20 minutes on a modern laptop with gigabit Ethernet.
 ## First time usage
 Once the build is done, run the initialization script in the container,
 
-`singularity exec uppmax_in_a_can_latest uppmax_init`
+`singularity run uppmax_in_a_can uppmax_init`
 
 ## Subsequent usage
 Start the virtual node:
-`./start_node.sh uppmax_in_a_can_latest.sif`
+`./uiac_node.sh -i uppmax_in_a_can`
 
 You will now be on the command-line inside the container and you can run commands as if you were logged in on UPPMAX. You will see all project folders in `/proj`, all software in `/sw`, your UPPMAX home folder in `/home/<UPPMAX_username>`
 
@@ -69,20 +69,13 @@ You can also specify any additional singularity options to the `start_node.sh` s
 
 ```bash
 # Entire hard drive 
-./start_node.sh --bind /:/hostfs uppmax_in_a_can_latest.sif
+./uiac_node.sh -e "--bind /:/hostfs" -i uppmax_in_a_can
 
 # Only a specific directory
-./start_node.sh --bind /home/user/data:/hostfs uppmax_in_a_can_latest.sif
+./uiac_node.sh -e "--bind /home/user/data:/hostfs" -i uppmax_in_a_can
 ```
 
 This command will make your computers file system available under `/hostfs` (or wherever you would like it).
-
-If you want to run specific commands rather than be dropped on an interactive command-line, you can use the `exec` argument to singularity.
-
-
-```bash
-singularity exec --containall --bind mnt/crex:/crex,mnt/etc:/etc,mnt/home/:/home/,mnt/proj:/proj,mnt/sw:/sw,mnt/usr/local/Modules:/usr/local/Modules uppmax_in_a_can_latest.sif <custom commands here>
-```
 
 
 # Developer notes
