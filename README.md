@@ -27,7 +27,7 @@ For installation instructions for these, see respective projects homepage.
 ### Using a pre-built image
 
 ```bash
-singularity pull shub://UPPMAX/uppmax_in_a_can
+singularity build --sandbox uppmax_in_a_can shub://UPPMAX/uppmax_in_a_can:latest
 ```
 
 ### Building your own image from github. 
@@ -36,7 +36,7 @@ Clone the github repo and build the image:
 ```bash
 git clone https://github.com/UPPMAX/uppmax_in_a_can.git
 cd uppmax_in_a_can
-singularity build uppmax_in_a_can_latest.sif Singularity
+singularity build --sandbox uppmax_in_a_can Singularity
 ```
 
 The build takes 10-20 minutes on a modern laptop with gigabit Ethernet. 
@@ -47,7 +47,7 @@ The build takes 10-20 minutes on a modern laptop with gigabit Ethernet.
 ## First time usage
 Once the build is done, run the initialization script in the container,
 
-`singularity exec uppmax_in_a_can_latest.sif uppmax_init`
+`singularity exec uppmax_in_a_can_latest uppmax_init`
 
 ## Subsequent usage
 Start the virtual node:

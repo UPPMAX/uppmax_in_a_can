@@ -1,8 +1,0 @@
-#!/bin/bash
-
-#set -e
-
-printf "Copying files\n"
-cp -v /uppmax_init/sshfs .
-
-printf "\nsshfs binary copied.\n"
