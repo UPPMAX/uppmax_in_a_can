@@ -51,6 +51,7 @@ Once the build is done, run the initialization script in the container,
 
 ## Subsequent usage
 Start the virtual node:
+
 `./uiac_node.sh -i uppmax_in_a_can`
 
 You will now be on the command-line inside the container and you can run commands as if you were logged in on UPPMAX. You will see all project folders in `/proj`, all software in `/sw`, your UPPMAX home folder in `/home/<UPPMAX_username>`
