@@ -32,8 +32,9 @@ export PS1='\[$(tput bold)\][\t] \u@canned-uppmax \w \\$ \[$(tput sgr0)\]'
 # add the scripts to the path
 export PATH=$PATH:/uppmax_init/
 
-# get username from file
-export USER=$(cat /uppmax_init/username.txt)
+# set the correct user name in places
+export USER=$UIAC_USER
 export USERNAME=$USER
 export HOME=/home/$USER
-
+export LOGNAME=$USER
+export MAIL=/var/spool/mail/$USER

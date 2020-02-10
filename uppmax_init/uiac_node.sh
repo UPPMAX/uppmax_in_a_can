@@ -197,8 +197,5 @@ fi
 #                                                   
 # Start node
 
-# update the uppmax username in the image directory
-printf "$a" > $image/uppmax_init/username.txt
-
-singularity shell --no-home --contain --bind $image/mnt/sw:/sw,$image/mnt/proj:/proj,$image/mnt/usr/local/Modules:/usr/local/Modules,$image/mnt/home/:/home/,$image/mnt/crex:/crex $extra_options $image
+SINGULARITYENV_UIAC_USER=$a singularity shell --no-home --contain --bind $image/mnt/sw:/sw,$image/mnt/proj:/proj,$image/mnt/usr/local/Modules:/usr/local/Modules,$image/mnt/home/:/home/,$image/mnt/crex:/crex $extra_options $image
 
