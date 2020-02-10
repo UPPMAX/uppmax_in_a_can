@@ -27,7 +27,7 @@ To use this container you have to have a computer that can use sshfs (https://gi
 
 If you are having problems installing sshfs, you could try to use the sshfs binary included in the container, a copy from a Ubuntu 18.04 64-bit computer. Who knows, maybe it works on your computer. If you run
 
-singularity run $SINGULARITY_NAME sshfs_extract
+./$SINGULARITY_NAME sshfs_extract
 
 
 and you will have a copy of the sshfs binary in the folder you are standing. You can try running it just to see if it runs
@@ -37,7 +37,7 @@ and you will have a copy of the sshfs binary in the folder you are standing. You
 
 which should give you a message about 'missing host' if it starts. Place this somewhere that is in your PATH and see if it works. To put the current working directory in your PATH you can run
 
-export PATH=$PATH:\"$(pwd)\"
+export PATH=\$PATH:\"\$(pwd)\"
 
 
 You will have to enable allow_other in your fuse.conf for the mounting to work. Usually it is located in /etc/fuse.conf, edit this file and make sure the line
@@ -62,7 +62,7 @@ else
 -----------------------------------------
 For the impatient:
 # run this first time using it
-$ singularity run $SINGULARITY_NAME uppmax_init
+$ ./$SINGULARITY_NAME uppmax_init
 
 # start the container
 $ ./uiac_node.sh -i $SINGULARITY_NAME
@@ -84,12 +84,12 @@ Hello, and welcome to UPPMAX-in-a-can
 
 In short, you have to have have sshfs working with the option user_allow_other enabled in your fuse.conf. To see more info about this, run
 
-singularity run $SINGULARITY_NAME sshfs_help
+./$SINGULARITY_NAME sshfs_help
 
 
 If you have just downloaded the container file you will have to run a initialization command and the container will create the needed files for you, in the directory you are standing when executing the command:
 
-singularity run $SINGULARITY_NAME uppmax_init
+./$SINGULARITY_NAME uppmax_init
 
 
 This command should have created a file named uiac_node.sh
@@ -103,7 +103,7 @@ and it will use sshfs (must be in your PATH) to mount the sw, proj, crex and hom
 
 If you want to unmount the sshfs mounts, just run 
 
-./uiac_node.sh -i $SINGULARITY_NAME -u
+./uiac_node.sh -u
 
 """
 
