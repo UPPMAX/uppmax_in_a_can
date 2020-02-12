@@ -12,7 +12,7 @@ This Singularity container will let you run a near-identical UPPMAX environment 
 
 # Important notes
 * The first time you run `module` it will have to go through all the module files at UPPMAX, which takes quite a bit longer when you do it over a sshfs connection. It could take a minute or two. After that initial command, the module list will be cached and subsequent request should be much faster.
-* Since all data you read/write to the UPPMAX file system will have to travel over the internet, disk intensive programs will be much slower, and transfer rate is limited to your internet connection.
+* Since all data you read/write to the UPPMAX file system will have to travel over the internet, disk intensive programs will be much slower, and transfer rate is limited to your internet connection. Try working on your local harddrive as much as possible.
 
 # Prerequisites
 This tool has been developed on Ubuntu 18.04 with Singularity v.3.5. You should only need 2 things for this to work,
@@ -27,7 +27,7 @@ For installation instructions for these, see respective projects homepage.
 ### Using a pre-built image
 
 ```bash
-singularity build --sandbox uppmax_in_a_can shub://UPPMAX/uppmax_in_a_can:latest
+singularity build . shub://UPPMAX/uppmax_in_a_can:latest
 ```
 
 ### Building your own image from github. 
@@ -36,7 +36,7 @@ Clone the github repo and build the image:
 ```bash
 git clone https://github.com/UPPMAX/uppmax_in_a_can.git
 cd uppmax_in_a_can
-singularity build --sandbox uppmax_in_a_can Singularity
+singularity build uppmax_in_a_can_latest.sif Singularity
 ```
 
 The build takes 10-20 minutes on a modern laptop with gigabit Ethernet. 
@@ -47,12 +47,22 @@ The build takes 10-20 minutes on a modern laptop with gigabit Ethernet.
 ## First time usage
 Once the build is done, run the initialization script in the container,
 
-`singularity run uppmax_in_a_can uppmax_init`
+```bash
+./uppmax_in_a_can_latest.sif uppmax_init
+
+# to see more options, run
+./uppmax_in_a_can_latest.sif
+```
 
 ## Subsequent usage
 Start the virtual node:
 
-`./uiac_node.sh -i uppmax_in_a_can`
+```bash
+./uiac_node.sh -i uppmax_in_a_can
+
+# to see more options, run
+./uiac_node.sh -h
+```
 
 You will now be on the command-line inside the container and you can run commands as if you were logged in on UPPMAX. You will see all project folders in `/proj`, all software in `/sw`, your UPPMAX home folder in `/home/<UPPMAX_username>`
 
@@ -66,14 +76,14 @@ To close down and return to your own computers command-line, just type `exit`.
 
 # Advanced usage
 
-You can also specify any additional singularity options to the `start_node.sh` script. If you want to make your computers file system visible inside the container so that you can analyse files residing on your computer, just add a bind argument:
+You can also specify any additional singularity options to the `uiac_node.sh` script. If you want to make your computers file system visible inside the container so that you can analyse files residing on your computer, just add a bind argument:
 
 ```bash
 # Entire hard drive 
-./uiac_node.sh -e "--bind /:/hostfs" -i uppmax_in_a_can
+./uiac_node.sh -e "--bind /:/hostfs" -i uppmax_in_a_can_latest.sif
 
 # Only a specific directory
-./uiac_node.sh -e "--bind /home/user/data:/hostfs" -i uppmax_in_a_can
+./uiac_node.sh -e "--bind /home/user/data:/hostfs" -i uppmax_in_a_can_latest.sif
 ```
 
 This command will make your computers file system available under `/hostfs` (or wherever you would like it).
