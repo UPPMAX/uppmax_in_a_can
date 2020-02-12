@@ -23,6 +23,9 @@ From: centos:7
     SINGULARITY_BUILD_DATE=`date`
     echo "export SINGULARITY_BUILD_DATE=\"${SINGULARITY_BUILD_DATE}\"" >> $SINGULARITY_ENVIRONMENT
 
+    # clean yum cache
+    yum clean all
+
     
 
 
