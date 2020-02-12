@@ -10,8 +10,11 @@ then
     # print success message
     echo """ 
 To start, run:
-
 ./uiac_node.sh -i $SINGULARITY_NAME
+
+or
+./uiac_node.sh -h
+for info about available options.
 
 """
 
@@ -99,7 +102,7 @@ To start using the container just run the following command:
 ./uiac_node.sh -i $SINGULARITY_NAME
 
 
-and it will use sshfs (must be in your PATH) to mount the sw, proj, crex and home folder on UPPMAX, to the folders inside mnt/ in the image folder. It will then start the container automatically. If you have already mounted the folders in a previous run of the command it will skip re-mounting them and just start the container.
+and it will use sshfs (must be in your PATH) to mount the sw, proj, crex and home folder on UPPMAX, to the mnt/ folder you specify with -p (default is the folder you are standing in). It will then start the container automatically. If you have already mounted the folders in a previous run of the command it will skip re-mounting them and just start the container.
 
 If you want to unmount the sshfs mounts, just run 
 

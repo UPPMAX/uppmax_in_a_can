@@ -28,7 +28,7 @@ print_usage() {
   -i    Path to the Singularity image file (default: $default_image_name=)
   -e	Extra Singularity options to be passed, e.g. additional --bind
   -m	Mount the sshfs shares only, don't start the container.
-  -p    Paht to where mount points for sshfs will be created (default: ./)
+  -p    Path to where mount points for sshfs will be created (default: ./)
   -s	Start the container only, don't mount the sshfs shars.
   -u	Unmount sshfs shares only, don't start the container.
 
