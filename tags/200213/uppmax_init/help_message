@@ -1,0 +1,120 @@
+#!/bin/bash
+
+
+if [[ $1 == 'uppmax_init' ]]
+then
+    # copy the mounting files to where the user is
+    # printf "Copying files\n"
+    cp /uppmax_init/*.sh .
+
+    if [[ $? == 0 ]] 
+    then
+
+        echo """ 
+        File uiac_node.sh copied. To start the container, run:
+        ./uiac_node.sh -i $SINGULARITY_NAME
+
+
+        For info about available options:
+        ./uiac_node.sh -h
+
+        """
+    else
+        printf 'ERROR! Copying failed. Exiting.'
+        exit 1
+    fi
+
+
+elif [[ $1 == 'sshfs_help' ]]
+then
+    echo """ ____ ____  _   _ _____ ____    _   _ _____ _     ____   
+/ ___/ ___|| | | |  ___/ ___|  | | | | ____| |   |  _ \  
+\___ \___ \| |_| | |_  \___ \  | |_| |  _| | |   | |_) | 
+ ___) |__) |  _  |  _|  ___) | |  _  | |___| |___|  __/  
+|____/____/|_| |_|_|   |____/  |_| |_|_____|_____|_|     
+
+To use this container you have to have a computer that can use sshfs (https://github.com/libfuse/sshfs) to mount folder over ssh. If you are running Linux it might be possible to install from your ordinary software repositories, otherwise you can search for instructions on how to install it on your operating system and usually find a good guide. 
+
+If you are having problems installing sshfs, you could try to use the sshfs binary included in the container, a copy from a Ubuntu 18.04 64-bit computer. Who knows, maybe it works on your computer. If you run:
+
+./$SINGULARITY_NAME sshfs_extract
+
+
+then you will have a copy of the sshfs binary in the folder you are standing. You can try running it just to see if it runs
+
+./sshfs
+
+
+which should give you a message about 'missing host' if it starts. Place this somewhere that is in your PATH and see if it works. To put the current working directory in your PATH you can run
+
+export PATH=\$PATH:\"\$(pwd)\"
+
+
+You will have to enable allow_other in your fuse.conf for the mounting to work. Usually it is located in /etc/fuse.conf, edit this file and make sure the line
+
+user_allow_other
+
+is uncommented.
+"""
+
+
+elif [[ $1 == 'sshfs_extract' ]]
+then
+    printf "Copying files\n"
+    cp -v /uppmax_init/sshfs .
+
+    printf "\nsshfs binary copied.\n"
+
+
+else
+    echo """See GitHub page for documentation: https://github.com/UPPMAX/uppmax_in_a_can
+
+-----------------------------------------
+For the impatient:
+# run this first time using it
+$ ./$SINGULARITY_NAME uppmax_init
+
+# start the container
+$ ./uiac_node.sh -i $SINGULARITY_NAME
+-----------------------------------------
+     _   _ ____  ____  __  __    _    __  __ 
+    | | | |  _ \|  _ \|  \/  |  / \   \ \/ / 
+    | | | | |_) | |_) | |\/| | / _ \   \  /  
+    | |_| |  __/|  __/| |  | |/ ___ \  /  \  
+     \___/|_|   |_|   |_|  |_/_/   \_\/_/\_\ 
+  ___ _   _         _          ____    _    _   _  
+ |_ _| \ | |       / \        / ___|  / \  | \ | | 
+  | ||  \| |_____ / _ \ _____| |     / _ \ |  \| | 
+  | || |\  |_____/ ___ \_____| |___ / ___ \| |\  | 
+ |___|_| \_|    /_/   \_\     \____/_/   \_\_| \_| 
+
+
+
+Hello, and welcome to UPPMAX-in-a-can
+
+If you have just downloaded the container file you will have to run a initialization command and the container will create the needed files for you, in the folder you are standing when executing the command:
+
+./$SINGULARITY_NAME uppmax_init
+
+
+This command should have created a file named uiac_node.sh
+
+To start using the container just run the following command:
+
+./uiac_node.sh -i $SINGULARITY_NAME
+
+
+and it will use sshfs (must be in your PATH) to mount the sw, proj, crex and home folder on UPPMAX, to the mnt/ folder you specify with -p (default is the folder you are standing in). It will then start the container automatically. If you have already mounted the folders in a previous run of the command it will skip re-mounting them and just start the container. For sshfs to work you need to make sure that user_allow_other is uncommented in /etc/fuse.conf. To see more info about
+sshfs please run:
+
+./$SINGULARITY_NAME sshfs_help
+
+
+If you want to unmount the sshfs mounts, just run 
+
+./uiac_node.sh -u
+
+
+"""
+
+fi
