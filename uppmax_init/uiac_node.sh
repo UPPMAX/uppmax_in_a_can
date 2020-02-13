@@ -224,5 +224,5 @@ fi
 #                                                   
 # Start node
 
-SINGULARITYENV_UIAC_USER="$a" singularity shell --no-home --contain --bind "$mountpoint_dir"/mnt/sw:/sw,"$mountpoint_dir"/mnt/proj:/proj,"$mountpoint_dir"/mnt/usr/local/Modules:/usr/local/Modules,"$mountpoint_dir"/mnt/home/:/home/,"$mountpoint_dir"/mnt/crex:/crex $extra_options "$image"
+SINGULARITYENV_UIAC_USER="$a" singularity shell --no-home --home /home/"$a" --contain --bind "$mountpoint_dir"/mnt/sw:/sw,"$mountpoint_dir"/mnt/proj:/proj,"$mountpoint_dir"/mnt/usr/local/Modules:/usr/local/Modules,"$mountpoint_dir"/mnt/home/:/home/,"$mountpoint_dir"/mnt/crex:/crex $extra_options "$image"
 
