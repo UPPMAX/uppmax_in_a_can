@@ -14,11 +14,6 @@ export MODULES_MACH=x86_64
 export MODULE_INCLUDE=/sw/mf/common/includes
 export MODULE_MACH=x86_64
 export MODULE_VERSION=lmod
-export __LMOD_REF_COUNT_LOADEDMODULES=uppmax:2
-export __LMOD_REF_COUNT_MANPATH=/usr/share/man:/sw/uppmax/man:/opt/thinlinc/share/man:2
-export __LMOD_REF_COUNT_MODULEPATH=/sw/mf/rackham/applications:/sw/mf/rackham/build-tools:/sw/mf/rackham/compilers:/sw/mf/rackham/data:/sw/mf/rackham/environment:/sw/mf/rackham/libraries:/sw/mf/rackham/parallel:
-export __LMOD_REF_COUNT_PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sw/uppmax/bin:2
-export __LMOD_REF_COUNT__LMFILES_=/sw/mf/rackham/environment/uppmax:1
 export modules_shell=bash
 export TERM=xterm
 
@@ -34,14 +29,25 @@ export PATH=$PATH:/uppmax_init/
 
 # set the correct user name in places
 export USER=$UIAC_USER
-export USERNAME=$USER
 export HOME=/home/$USER
 export LOGNAME=$USER
 export MAIL=/var/spool/mail/$USER
+export USERNAME=$USER
 
 # Set UPPMAX specific variables
+export CLUSTER=rackham
+export MANPATH=$MANPATH:/usr/share/man:/sw/uppmax/man:/opt/thinlinc/share/man
+export PATH=$PATH:/sw/uppmax/bin
 export SNIC_BACKUP=/home/$USER
 export SNIC_NOBACKUP=/home/$USER/glob
-export SNIC_RESOURCE=rackham
+export SNIC_RESOURCE=$CLUSTER
 export SNIC_SITE=uppmax
 export SNIC_TMP=/scratch
+
+# emulate uppmax specific aliases, since aliases can't be exported
+projinfo() { /sw/uppmax/bin/projinfo $1 ; }
+jobinfo() { /sw/uppmax/bin/jobinfo $1 ; }
+quota() { /bin/echo Please use uquota. ; }
+export -f projinfo
+export -f jobinfo
+export -f quota
