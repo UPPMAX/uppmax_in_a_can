@@ -11,8 +11,10 @@ This Singularity container will let you run a near-identical UPPMAX environment 
 * No slurm access. Everything runs on your computer.
 
 # Important notes
-* The first time you run `module` it will have to go through all the module files at UPPMAX, which takes quite a bit longer when you do it over a sshfs connection. It could take a minute or two. After that initial command, the module list will be cached and subsequent request should be much faster.
 * Since all data you read/write to the UPPMAX file system will have to travel over the internet, disk intensive programs will be much slower, and transfer rate is limited to your internet connection. Try working on your local harddrive as much as possible.
+
+# Issues
+* Some of the tools at uppmax, like projinfo and uquota are using your user's group membership to determin what information to show. Since your local user won't have the same groups as you have on uppmax they misbehave and will not show you the same information as when you run the program on uppmax.
 
 # Prerequisites
 This tool has been developed on Ubuntu 18.04 with Singularity v.3.5. You should only need 2 things for this to work,
