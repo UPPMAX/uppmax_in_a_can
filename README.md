@@ -15,6 +15,7 @@ This Singularity container will let you run a near-identical UPPMAX environment 
 
 # Issues
 * Some of the tools at uppmax, like projinfo and uquota are using your user's group membership to determin what information to show. Since your local user won't have the same groups as you have on uppmax they misbehave and will not show you the same information as when you run the program on uppmax.
+* If your user has not connected to uppmax before it will need to accept the login nodes fingerprint before connecting (a security feature). Sshfs will just hang if this happens, so you will have to connect normally to uppmax and manually accept the fingerprint. To make things more complicated there are 3 different login nodes, each with its own fingerprint, and you are randomly assigned to one. There is a possibility to turn this off in the sshfs mount command by adding `-o StrictHostKeyChecking=no`, but it might not be a good idea to disable it due to security. Easiest way around it is just to run `ssh user@rackham.uppmax.uu.se` a couple of times until you have seen all 3 fingerprints.
 
 # Prerequisites
 This tool has been developed on Ubuntu 18.04 with Singularity v.3.5. You should only need 2 things for this to work,

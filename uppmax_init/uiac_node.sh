@@ -31,6 +31,7 @@ print_usage() {
   -p    Path to where mount points for sshfs will be created (default: ./)
   -s	Start the container only, don't mount the sshfs shars.
   -u	Unmount sshfs shares only, don't start the container.
+  -d	Disable host fingerprint check (Not recommended).
 
 """
   printf "$usage"
@@ -38,7 +39,7 @@ print_usage() {
 }
 
 # check arguments
-while getopts ':i:e:msuhp:' flag; do
+while getopts ':i:e:msuhp:d' flag; do
   case "${flag}" in
     i) image="${OPTARG}" ;;
     e) extra_options="${OPTARG}" ;;
@@ -46,6 +47,7 @@ while getopts ':i:e:msuhp:' flag; do
     p) mountpoint_dir="${OPTARG}";;
     s) start_only=1 ;;
     u) unmount_only=1 ;;
+    d) disable_fingerprint=",StrictHostKeyChecking=no" ;;
     *) print_usage
        exit 1 ;;
   esac
@@ -146,7 +148,7 @@ then
 
             # Mount the directory (StrictHostKeyChecking=no to skip sshkey?)
             printf "Mounting %-20s \r" $share_name
-            sshfs -o allow_other,password_stdin $a@rackham.uppmax.uu.se:"/$share_name/" "$mountpoint_dir"/mnt/"$share_name" <<< $l
+            sshfs -o allow_other,password_stdin$disable_fingerprint $a@rackham.uppmax.uu.se:"/$share_name/" "$mountpoint_dir"/mnt/"$share_name" <<< $l
 
             if [[ $? != 0 ]]
             then
