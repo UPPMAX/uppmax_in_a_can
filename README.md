@@ -28,7 +28,7 @@ For installation instructions for these, see respective projects homepage.
 ### Using a pre-built image
 
 ```bash
-singularity build . shub://UPPMAX/uppmax_in_a_can:latest
+singularity pull shub://UPPMAX/uppmax_in_a_can:latest
 ```
 
 ### Building your own image from github. 
@@ -59,7 +59,7 @@ Once the build is done, run the initialization script in the container,
 Start the virtual node:
 
 ```bash
-./uiac_node.sh -i uppmax_in_a_can
+./uiac_node.sh -i uppmax_in_a_can_latest.sif
 
 # to see more options, run
 ./uiac_node.sh -h
