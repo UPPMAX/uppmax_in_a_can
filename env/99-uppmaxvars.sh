@@ -38,3 +38,10 @@ export USERNAME=$USER
 export HOME=/home/$USER
 export LOGNAME=$USER
 export MAIL=/var/spool/mail/$USER
+
+# Set UPPMAX specific variables
+export SNIC_BACKUP=/home/$USER
+export SNIC_NOBACKUP=/home/$USER/glob
+export SNIC_RESOURCE=rackham
+export SNIC_SITE=uppmax
+export SNIC_TMP=/scratch

@@ -4,18 +4,26 @@
 if [[ $1 == 'uppmax_init' ]]
 then
     # copy the mounting files to where the user is
-    printf "Copying files\n"
-    cp -v /uppmax_init/*.sh .
+    # printf "Copying files\n"
+    cp /uppmax_init/*.sh .
 
-    # print success message
-    echo """ 
-To start, run:
-./uiac_node.sh -i $SINGULARITY_NAME
+    if [[ $? == 0 ]] 
+    then
 
-For info about available options:
-./uiac_node.sh -h
+        echo """ 
+        File uiac_node.sh copied. To start the container, run:
+        ./uiac_node.sh -i $SINGULARITY_NAME
 
-"""
+
+        For info about available options:
+        ./uiac_node.sh -h
+
+        """
+    else
+        printf 'ERROR! Copying failed. Exiting.'
+        exit 1
+    fi
+
 
 elif [[ $1 == 'sshfs_help' ]]
 then
