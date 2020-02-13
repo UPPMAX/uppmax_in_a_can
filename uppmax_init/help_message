@@ -12,9 +12,8 @@ then
 To start, run:
 ./uiac_node.sh -i $SINGULARITY_NAME
 
-or
+For info about available options:
 ./uiac_node.sh -h
-for info about available options.
 
 """
 
