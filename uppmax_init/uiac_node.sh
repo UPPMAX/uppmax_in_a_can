@@ -126,6 +126,7 @@ then
     ./$default_image_name sshfs_extract ; PATH=\$PATH:\$(pwd) ; ./uiac_node.sh -i $default_image_name
 
     to get a precompiled sshfs executable that could work on your system. If it does not, please install sshfs on your own (https://github.com/libfuse/sshfs).
+
     " ; exit 1; }
 
     # Create a sshfs mount function
