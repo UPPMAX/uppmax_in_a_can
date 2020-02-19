@@ -67,7 +67,7 @@ From: centos:7
     fi
 
     # Evaluate shell expressions first and set arguments accordingly,
-    # then execute final command as first container process
+    # then execute final command as first container process 
     eval "set ${SINGULARITY_OCI_RUN}"
     exec "$@"
 
