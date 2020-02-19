@@ -59,7 +59,6 @@ for envvar in $(env)
 do
     if [[ $envvar == "__LMOD"* ]]
     then
-        echo $envvar
         envvarname=$(echo $envvar | cut -d "=" -f 1)
         export $envvarname=''
     fi
