@@ -2,7 +2,7 @@ Bootstrap: docker
 From: centos:7
 
 
-## Modify this line to trigger a Singularity Hub rebuild of the image. 
+## Modify this line to trigger a Singularity Hub rebuild of the image.  
 
 %files
 
