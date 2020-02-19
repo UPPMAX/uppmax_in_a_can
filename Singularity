@@ -13,7 +13,7 @@ From: centos:7
     env/99-uppmaxvars.sh /.singularity.d/env/
 
 %post
-    echo "meh"
+    
     # install epel repo
     yum install -y epel-release
 
