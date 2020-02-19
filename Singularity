@@ -71,5 +71,4 @@ From: centos:7
     eval "set ${SINGULARITY_OCI_RUN}"
     exec "$@"
 
-
     
