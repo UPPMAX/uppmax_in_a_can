@@ -1,8 +1,8 @@
-Bootstrap: docker 
+Bootstrap: docker
 From: centos:7
 
 
-## Modify this line to trigger a Singularity Hub rebuild of the image.  
+## Modify this line to trigger a Singularity Hub rebuild of the image.
 
 %files
 
@@ -13,7 +13,7 @@ From: centos:7
     env/99-uppmaxvars.sh /.singularity.d/env/
 
 %post
-
+    echo "meh"
     # install epel repo
     yum install -y epel-release
 
