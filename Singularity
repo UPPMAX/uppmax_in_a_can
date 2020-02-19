@@ -1,7 +1,8 @@
 Bootstrap: docker
 From: centos:7
 
-# Modify this line to trigger a Singularity Hub rebuild of the image. 
+
+## Modify this line to trigger a Singularity Hub rebuild of the image.
 
 %files
 
@@ -12,7 +13,7 @@ From: centos:7
     env/99-uppmaxvars.sh /.singularity.d/env/
 
 %post
-
+    echo "meh"
     # install epel repo
     yum install -y epel-release
 
@@ -67,9 +68,8 @@ From: centos:7
     fi
 
     # Evaluate shell expressions first and set arguments accordingly,
-    # then execute final command as first container process
+    # then execute final command as first container process 
     eval "set ${SINGULARITY_OCI_RUN}"
     exec "$@"
-
 
     
