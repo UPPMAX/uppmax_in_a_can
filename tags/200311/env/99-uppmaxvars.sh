@@ -1,4 +1,5 @@
 # variables
+export LC_ALL=C
 export LMOD_CACHED_LOADS=yes
 export LMOD_CMD=/usr/share/lmod/lmod/libexec/lmod
 export LMOD_DEFAULT_MODULEPATH=/sw/mf/rackham/applications:/sw/mf/rackham/build-tools/:/sw/mf/rackham/compilers/:/sw/mf/rackham/data/:/sw/mf/rackham/environment/:/sw/mf/rackham/libraries/:/sw/mf/rackham/parallel/
@@ -14,8 +15,8 @@ export MODULES_MACH=x86_64
 export MODULE_INCLUDE=/sw/mf/common/includes
 export MODULE_MACH=x86_64
 export MODULE_VERSION=lmod
-export modules_shell=bash
 export TERM=xterm
+export modules_shell=bash
 
 # module function
 module() { eval `/usr/local/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
@@ -51,3 +52,17 @@ quota() { /bin/echo Please use uquota. ; }
 export -f projinfo
 export -f jobinfo
 export -f quota
+
+
+# Remove __LMOD__stuff. Don't look at paths that doesn't exist. Speeds up the module system from 1 minute to 1 second.
+for envvar in $(env)
+do
+    if [[ $envvar == "__LMOD"* ]]
+    then
+        envvarname=$(echo $envvar | cut -d "=" -f 1)
+        export $envvarname=''
+    fi
+done
+
+
+
