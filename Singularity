@@ -7,7 +7,7 @@ From: centos:7
 %files
 
     # copy the scripts to the image
-    uppmax_init /
+    uppmax_init  /
     
     # put all variable and function definitions in the image, will be sourced on startup
     env/99-uppmaxvars.sh /.singularity.d/env/
