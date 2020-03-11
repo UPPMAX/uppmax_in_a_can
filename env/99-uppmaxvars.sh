@@ -35,25 +35,6 @@ export LOGNAME=$USER
 export MAIL=/var/spool/mail/$USER
 export USERNAME=$USER
 
-# Set UPPMAX specific variables
-export CLUSTER=rackham
-export MANPATH=$MANPATH:/usr/share/man:/sw/uppmax/man:/opt/thinlinc/share/man
-export PATH=$PATH:/sw/uppmax/bin
-export SNIC_BACKUP=/home/$USER
-export SNIC_NOBACKUP=/home/$USER/glob
-export SNIC_RESOURCE=$CLUSTER
-export SNIC_SITE=uppmax
-export SNIC_TMP=/scratch
-
-# emulate uppmax specific aliases, since aliases can't be exported
-projinfo() { /sw/uppmax/bin/projinfo $1 ; }
-jobinfo() { /sw/uppmax/bin/jobinfo $1 ; }
-quota() { /bin/echo Please use uquota. ; }
-export -f projinfo
-export -f jobinfo
-export -f quota
-
-
 # Remove __LMOD__stuff. Don't look at paths that doesn't exist. Speeds up the module system from 1 minute to 1 second.
 for envvar in $(env)
 do
@@ -64,5 +45,9 @@ do
     fi
 done
 
+# unload any other centra modules and load the uppmax one
+module --force purge
+module load uppmax
 
-
+# The cluster variable is not set by the module load..
+export CLUSTER=$SNIC_RESOURCE

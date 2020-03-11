@@ -90,6 +90,13 @@ fi
 
 
 
+# check if sshfs in is the path
+[[ $(command -v sshfs) ]] || { printf "There is no sshfs in your PATH. Please run 
+
+./$default_image_name sshfs_extract ; PATH=\$PATH:\$(pwd) ; ./uiac_node.sh -i $default_image_name
+
+to get a precompiled sshfs executable that could work on your system. If it does not, please install sshfs on your own (https://github.com/libfuse/sshfs)." ; exit 1; }
+
 #  __  __                   _   
 # |  \/  | ___  _   _ _ __ | |_ 
 # | |\/| |/ _ \| | | | '_ \| __|
@@ -120,14 +127,6 @@ declare -A sub_mount=( \
 if (( start_only+unmount_only == 0 ))
 then
 
-    # check if sshfs in is the path
-    [[ $(command -v sshfs) ]] || { printf "There is no sshfs in your PATH. Please run 
-
-    ./$default_image_name sshfs_extract ; PATH=\$PATH:\$(pwd) ; ./uiac_node.sh -i $default_image_name
-
-    to get a precompiled sshfs executable that could work on your system. If it does not, please install sshfs on your own (https://github.com/libfuse/sshfs).
-
-    " ; exit 1; }
 
     # Create a sshfs mount function
     function sshfs_mount () {
@@ -191,9 +190,9 @@ then
         fusermount -u "$mountpoint_dir"/mnt/$mount
         if [[ $? != 0 ]]
         then
-            printf "Mounting /$mount/ %-20s FAILED!\n"
+            printf "Unmounting /$mount/ %-20s FAILED!\n"
         else
-            printf "Mounting %-20s DONE\n" $mount
+            printf "Unmounting %-20s DONE\n" $mount
         fi
     done
 fi
