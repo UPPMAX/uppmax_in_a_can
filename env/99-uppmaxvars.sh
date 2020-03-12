@@ -18,9 +18,6 @@ export MODULE_VERSION=lmod
 export TERM=xterm
 export modules_shell=bash
 
-# module function
-module() { eval `/usr/local/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
-export -f module
 
 # custom PS1
 export PS1='\[$(tput bold)\][\t] \u@canned-uppmax \w \\$ \[$(tput sgr0)\]'
@@ -35,6 +32,18 @@ export LOGNAME=$USER
 export MAIL=/var/spool/mail/$USER
 export USERNAME=$USER
 
+# only load the modules if the container is being launced through the script, when the mount points are up
+if [[ -n "$UIAC_USER" ]]
+then
+    # module function
+    module() { eval `/usr/local/Modules/$MODULE_VERSION/bin/modulecmd $modules_shell $*`; }
+    export -f module
+
+    # unload any other centra modules and load the uppmax one
+    module --force purge
+    module load uppmax
+fi
+
 # Remove __LMOD__stuff. Don't look at paths that doesn't exist. Speeds up the module system from 1 minute to 1 second.
 for envvar in $(env)
 do
@@ -44,16 +53,11 @@ do
         export $envvarname=''
     fi
 done
-
-# unload any other centra modules and load the uppmax one
-module --force purge
-module load uppmax
-
 # The cluster variable is not set by the module load..
 export CLUSTER=$SNIC_RESOURCE
 
 # QoL
-l() { ls -lh --color --group-directories-first }
-ll() { ls -lah --color --group-directories-first }
+l() { ls -lh --color --group-directories-first ; }
+ll() { ls -lah --color --group-directories-first ; }
 export -f l
 export -f ll
