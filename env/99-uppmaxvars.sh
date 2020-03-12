@@ -51,3 +51,9 @@ module load uppmax
 
 # The cluster variable is not set by the module load..
 export CLUSTER=$SNIC_RESOURCE
+
+# QoL
+l() { ls -lh --color --group-directories-first }
+ll() { ls -lah --color --group-directories-first }
+export -f l
+export -f ll

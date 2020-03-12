@@ -244,17 +244,14 @@ fi
 #                                                   
 # Start node
 
-# feel free to try to make this into a single line.. darn auto-adding quotes..
 # if the user want to run a command in the container instead of opening an interactive shell
 if [[ -n "$cmd" ]]
 then
     mode="exec"
-    SINGULARITYENV_UIAC_USER="$username" singularity $mode --no-home --home /home/"$username" --contain --bind "$mountpoint_dir"/mnt/sw:/sw,"$mountpoint_dir"/mnt/proj:/proj,"$mountpoint_dir"/mnt/usr/local/Modules:/usr/local/Modules,"$mountpoint_dir"/mnt/home/:/home/,"$mountpoint_dir"/mnt/crex:/crex $extra_options "$image" bash -c "$cmd"
-
-
+    cmd="bash -c \"$cmd\""
 else
     mode="shell"
-    SINGULARITYENV_UIAC_USER="$username" singularity $mode --no-home --home /home/"$username" --contain --bind "$mountpoint_dir"/mnt/sw:/sw,"$mountpoint_dir"/mnt/proj:/proj,"$mountpoint_dir"/mnt/usr/local/Modules:/usr/local/Modules,"$mountpoint_dir"/mnt/home/:/home/,"$mountpoint_dir"/mnt/crex:/crex $extra_options "$image"
 fi
 
+SINGULARITYENV_UIAC_USER="$username" singularity $mode --no-home --home /home/"$username" --contain --bind "$mountpoint_dir"/mnt/sw:/sw,"$mountpoint_dir"/mnt/proj:/proj,"$mountpoint_dir"/mnt/usr/local/Modules:/usr/local/Modules,"$mountpoint_dir"/mnt/home/:/home/,"$mountpoint_dir"/mnt/crex:/crex $extra_options "$image" $cmd
 
