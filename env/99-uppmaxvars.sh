@@ -5,6 +5,7 @@ export LMOD_CMD=/usr/share/lmod/lmod/libexec/lmod
 export LMOD_DEFAULT_MODULEPATH=/sw/mf/rackham/applications:/sw/mf/rackham/build-tools/:/sw/mf/rackham/compilers/:/sw/mf/rackham/data/:/sw/mf/rackham/environment/:/sw/mf/rackham/libraries/:/sw/mf/rackham/parallel/
 export LMOD_DIR=/usr/share/lmod/lmod/libexec
 export LMOD_PKG=/usr/share/lmod/lmod
+export LMOD_RC=/sw/share/compstore/production/uiac/lmodrc.lua
 export LMOD_SETTARG_FULL_SUPPORT=no
 export LOADEDMODULES=uppmax
 export MODULEPATH=/sw/mf/rackham/applications:/sw/mf/rackham/build-tools:/sw/mf/rackham/compilers:/sw/mf/rackham/data:/sw/mf/rackham/environment:/sw/mf/rackham/libraries:/sw/mf/rackham/parallel
@@ -57,7 +58,7 @@ done
 export CLUSTER=$SNIC_RESOURCE
 
 # QoL
-l() { ls -lh --color --group-directories-first ; }
-ll() { ls -lah --color --group-directories-first ; }
+l() { ls -lh --color --group-directories-first $* ; }
+ll() { ls -lah --color --group-directories-first $* ; }
 export -f l
 export -f ll
