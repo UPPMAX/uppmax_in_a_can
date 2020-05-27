@@ -5,6 +5,7 @@ This Singularity container will let you run a near-identical UPPMAX environment 
 * You have sensitive data that is not allowed to leave your computers, but you want to use the programs and references at UPPMAX to do the analysis.
 * You have your own server but want to avoid installing all the software yourself.
 * The queues at UPPMAX are too long or you have run out of core hours but you want the analysis done yesterday.
+* You have your data and compute hours at another SNIC centre, but want to use the software installed at UPPMAX.
 
 # What you get
 * Access to your home folder and all project folders.
