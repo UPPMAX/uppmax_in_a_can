@@ -28,7 +28,16 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Search sshfs
-        run: apt search sshfs
+        run: sudo apt-get update || true
+
+      - name: Search sshfs
+        run: sudo apt update || true
+
+      - name: Search sshfs
+        run: apt-cache search sshfs || true
+
+      - name: Search sshfs
+        run: apt search sshfs || true
 
       - name: Stop
         run: exit 42
