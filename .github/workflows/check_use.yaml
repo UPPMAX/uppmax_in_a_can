@@ -1,5 +1,5 @@
 # Confirm that the Singularity container can be used
-name: Check build
+name: Check use
 
 on:
   push:

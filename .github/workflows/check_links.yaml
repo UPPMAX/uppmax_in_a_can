@@ -1,3 +1,6 @@
+# Confirm that all URL links are valid
+name: Check links
+
 on:
   push:
   pull_request:
