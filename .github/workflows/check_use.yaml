@@ -36,8 +36,8 @@ jobs:
       - name: Initialize the container
         run: ./uppmax_in_a_can_latest.sif uppmax_init
 
-      - name: Show help of uiac_node.sh
-        run: ./uppmax_init/uiac_node.sh -h
+      - name: Show help of uiac_node.sh. This returns an error code
+        run: ./uppmax_init/uiac_node.sh -h || true
 
       - name: Start the virtual node (I guess this will freeze the build)
         run: ./uppmax_init/uiac_node.sh -i uppmax_in_a_can_latest.sif
