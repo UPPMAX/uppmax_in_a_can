@@ -1,0 +1,45 @@
+# Confirm that the Singularity container can be used
+name: Check build
+
+on:
+  push:
+  pull_request:
+  schedule:
+  - cron: "0 0 1 * *"
+
+jobs:
+
+  check_build:
+
+    strategy:
+      matrix:
+        singularity_version:
+          - '3.7.4'
+    container:
+      image: quay.io/singularity/singularity:v${{ matrix.singularity_version }}
+      options: --privileged
+
+    runs-on: ubuntu-latest
+    
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Show singularity version
+        run: singularity version
+
+      - name: Download the container
+        run: singularity pull shub://UPPMAX/uppmax_in_a_can:latest
+
+      - name: Initialize the container
+        run: ./uppmax_in_a_can_latest.sif uppmax_init
+
+      - name: Show help of uiac_node.sh
+        run: ./uiac_node.sh -h
+
+      - name: Start the virtual node (I guess this will freeze the build)
+        run: ./uiac_node.sh -i uppmax_in_a_can_latest.sif
+
+
