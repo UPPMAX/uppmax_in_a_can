@@ -27,21 +27,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Search sshfs
-        run: sudo apt-get update || true
-
-      - name: Search sshfs
-        run: sudo apt update || true
-
-      - name: Search sshfs
-        run: apt-cache search sshfs || true
-
-      - name: Search sshfs
-        run: apt search sshfs || true
-
-      - name: Stop
-        run: exit 42
-
       - name: Show singularity version
         run: singularity version
 
@@ -54,10 +39,10 @@ jobs:
       - name: Show help of uiac_node.sh. This returns an error code
         run: ./uppmax_init/uiac_node.sh -h || true
 
-      - name: Install sshfs
-        run: sudo apt install sshfs
+      #- name: Install sshfs, cannot, as container does not have apt
+      #  run: sudo apt install sshfs
 
-      - name: Start the virtual node (I guess this will freeze the build)
-        run: ./uppmax_init/uiac_node.sh -i uppmax_in_a_can_latest.sif
+      #- name: Start the virtual node (I guess this will freeze the build, needs sshfs)
+      #  run: ./uppmax_init/uiac_node.sh -i uppmax_in_a_can_latest.sif
 
 
