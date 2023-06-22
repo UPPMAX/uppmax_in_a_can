@@ -39,6 +39,9 @@ jobs:
       - name: Show help of uiac_node.sh. This returns an error code
         run: ./uppmax_init/uiac_node.sh -h || true
 
+      - name: Install sshfs
+        run: sudo apt install sshfs
+
       - name: Start the virtual node (I guess this will freeze the build)
         run: ./uppmax_init/uiac_node.sh -i uppmax_in_a_can_latest.sif
 
