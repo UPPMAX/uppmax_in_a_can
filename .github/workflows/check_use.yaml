@@ -37,9 +37,9 @@ jobs:
         run: ./uppmax_in_a_can_latest.sif uppmax_init
 
       - name: Show help of uiac_node.sh
-        run: ./uiac_node.sh -h
+        run: ./uppmax_init/uiac_node.sh -h
 
       - name: Start the virtual node (I guess this will freeze the build)
-        run: ./uiac_node.sh -i uppmax_in_a_can_latest.sif
+        run: ./uppmax_init/uiac_node.sh -i uppmax_in_a_can_latest.sif
 
 
