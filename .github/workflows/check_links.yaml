@@ -7,8 +7,6 @@ on:
   schedule:
   - cron: "0 0 12 * *"
 
-name: check-links
-
 jobs:
   check-links:
     runs-on: ubuntu-latest
