@@ -102,7 +102,7 @@ This command will make your computers file system available under `/hostfs` (or 
 # Developer notes
 
 To get the list of installed software on UPPMAX, run this command on UPPMAX:
-`yum list installed | cut -f 1 -d " " | cut -f 1 -d "." | sort > yum_installed.txt`
+`yum list installed | cut -f 1 -d " " | cut -f 1 -d "." | sort | tr '\n' ' '  > yum_installed_`date +%F.txt`
 
 This list will contain **all** installed packages, even core packages and nvidia packages that are not available in the default repos. It will just give a couple of warning messages when you send the list to `yum install`, but it will not break the installation process.
 
