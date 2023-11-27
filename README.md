@@ -26,7 +26,7 @@ This Singularity container will let you run a near-identical UPPMAX environment 
 # Prerequisites
 This tool has been developed on Ubuntu 18.04 with Singularity v.3.5. You should only need 2 things for this to work,
 
-* [Singularity (only tested with v3.5)](https://sylabs.io/guides/3.5/user-guide/quick_start.html)
+* [Singularity (only tested with v3.5)](https://docs.sylabs.io/guides/3.5/user-guide/quick_start.html)
 * [SSHFS](https://github.com/libfuse/sshfs)  
 (Make sure that the option `user_allow_other` is uncommented in `/etc/fuse.conf`)
 

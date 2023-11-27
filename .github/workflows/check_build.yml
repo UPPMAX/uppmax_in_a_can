@@ -1,0 +1,35 @@
+# Confirm that the Singularity container can be built
+name: Check build
+
+on:
+  push:
+  pull_request:
+  schedule:
+  - cron: "0 0 1 * *"
+
+jobs:
+
+  check_build:
+
+    strategy:
+      matrix:
+        singularity_version:
+          - '3.7.4'
+    container:
+      image: quay.io/singularity/singularity:v${{ matrix.singularity_version }}
+      options: --privileged
+
+    runs-on: ubuntu-latest
+    
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Show singularity version
+        run: singularity version
+
+      - name: Build, as from the README
+        run: singularity build uppmax_in_a_can_latest.sif Singularity
+
